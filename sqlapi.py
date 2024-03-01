@@ -28,6 +28,7 @@ def run_query():
     try:
         conn = get_db_connection()
         df = pd.read_sql_query(sql_query, conn)
+        df = df.head(50)
         conn.close()
         return jsonify(df.to_dict(orient='records'))
     except Exception as e:
