@@ -17,9 +17,10 @@ def run_query():
     payload = request.get_json()
     data = payload.get('data', {}) 
     sql_query = data.get('Returned SQL')
-    print(f"SQL Query Received: {sql_query}")  # Debug print
-    print(f"Type of SQL Query: {type(sql_query)}")
-    sql_query = str(sql_query)
+    if isinstance(sql_query, dict):
+        sql_query = sql_query.get('value')
+    else:
+        sql_query = sql_query
     
     if not sql_query:
         return jsonify({'error': 'No SQL_query provided'}), 400
