@@ -4,3 +4,4 @@ pandas
 pathlib
 openai
 promptlayer
+dotenv
