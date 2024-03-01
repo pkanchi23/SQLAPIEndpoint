@@ -1,3 +1,8 @@
 Flask
 gunicorn
 pandas
+sqlite3
+os
+pathlib
+openai
+promptlayer
