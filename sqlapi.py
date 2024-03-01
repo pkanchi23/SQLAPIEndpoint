@@ -31,7 +31,7 @@ def run_query():
         conn.close()
         return jsonify(df.to_dict(orient='records'))
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
