@@ -15,7 +15,7 @@ def get_db_connection():
 @app.route('/run-query', methods=['POST'])
 def run_query():
     data = request.get_json()
-    sql_query = data.get('SQL_query')
+    sql_query = data.get('Returned SQL')
     
     if not sql_query:
         return jsonify({'error': 'No SQL_query provided'}), 400
