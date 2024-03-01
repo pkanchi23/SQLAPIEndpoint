@@ -14,7 +14,12 @@ def get_db_connection():
 
 @app.route('/run-query', methods=['POST'])
 def run_query():
-    data = request.get_json()
+    # First, get the JSON payload
+    payload = request.get_json()
+    
+    # Access the 'data' object
+    data = payload.get('data', {}) 
+    
     sql_query = data.get('Returned SQL')
     
     if not sql_query:
