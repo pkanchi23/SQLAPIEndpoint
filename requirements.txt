@@ -1,7 +1,6 @@
 Flask
 gunicorn
 pandas
-pathlib
 openai
 promptlayer
-dotenv
+python-dotenv
