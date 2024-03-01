@@ -9,9 +9,8 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
-#uncomment to run locally
-# PROMPTLAYER_API_KEY = os.environ.get('PROMPTLAYER_API_KEY')
-# OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+PROMPTLAYER_API_KEY = os.environ.get('PROMPTLAYER_API_KEY')
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 promptlayer.api_key = PROMPTLAYER_API_KEY
 openai.api_key = OPENAI_API_KEY
 promptlayer.openai.api_key = OPENAI_API_KEY
