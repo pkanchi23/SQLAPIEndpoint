@@ -1,6 +1,6 @@
 Flask
 gunicorn
 pandas
-openai
+openai==0.28.0
 promptlayer
 python-dotenv
