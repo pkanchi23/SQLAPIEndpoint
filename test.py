@@ -10,13 +10,13 @@ sql_query = 'SELECT * FROM Orders LIMIT 10'
 # Adjust the data payload to match the expected structure
 payload = {
     "data": {
-        "Natural Language Question": "",  # Fill in or leave empty if not applicable
+        "Natural Language Question": "", 
         "Returned SQL": sql_query,
-        "Feedback": "",  # Fill in or leave empty if not applicable
-        "Program Ran": "",  # Fill in or leave empty if not applicable
-        "Columns": "",  # Fill in or leave empty if not applicable
-        "database_name": "",  # Fill in the actual database name if applicable
-        "other": ""  # Fill in or leave empty if not applicable
+        "Feedback": "",
+        "Program Ran": "",
+        "Columns": "", 
+        "database_name": "", 
+        "other": "" 
     }
 }
 
