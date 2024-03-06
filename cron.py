@@ -39,7 +39,7 @@ def generate_natural_language_question(columns):
     
     # Associate request to Prompt Template
     promptlayer.track.prompt(request_id=pl_id, 
-        prompt_name='NL_to_SQL', prompt_input_variables=variables)
+        prompt_name='generate_SQL_question', prompt_input_variables=variables)
     
     question = response.choices[0].message.content
     return question
