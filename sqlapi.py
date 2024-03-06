@@ -16,7 +16,7 @@ def get_db_connection():
 def run_query():
     payload = request.get_json()
     data = payload.get('data', {}) 
-    sql_query = data.get('Returned SQL')
+    sql_query = data.get('response')
     if isinstance(sql_query, dict):
         sql_query = sql_query.get('value')
     else:
