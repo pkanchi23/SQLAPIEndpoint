@@ -22,6 +22,7 @@ db_path = current_dir / 'northwind.db'
 conn = sqlite3.connect(str(db_path))
 cursor = conn.cursor()
 user_id = "Cron_"+str(random.randint(10000000, 99999999))
+pl_group_id = promptlayer.group.create()
 
 # Function to generate a natural language question (placeholder for your logic)
 def generate_natural_language_question(columns):
@@ -50,6 +51,11 @@ def generate_natural_language_question(columns):
         }
     )
     
+    promptlayer.track.group(
+        request_id=pl_id, 
+        group_id=pl_group_id
+    )
+    
     question = response.choices[0].message.content
     return question
 
@@ -75,6 +81,11 @@ def refine_sql_with_promptlayer(natural_language, columns):
         metadata={
             "User_ID":user_id
         }
+    )
+    
+    promptlayer.track.group(
+        request_id=pl_id, 
+        group_id=pl_group_id
     )
     
     # Associate request to Prompt Template
@@ -111,6 +122,11 @@ def sql_to_NL_answer(df, natural_language):
         metadata={
             "User_ID":user_id
         }
+    )
+    
+    promptlayer.track.group(
+        request_id=pl_id, 
+        group_id=pl_group_id
     )
 
     NL_answer = response.choices[0].message.content
