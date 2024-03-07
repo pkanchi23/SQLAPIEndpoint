@@ -24,9 +24,9 @@ cursor = conn.cursor()
 user_id = "Cron_"+str(random.randint(10000000, 99999999))
 pl_group_id = promptlayer.group.create()
 
-# Function to generate a natural language question (placeholder for your logic)
+# Function to generate a natural language question
 def generate_natural_language_question(columns):
-    # question = "How many different ship names are there?"
+    # question = "How many different ship names are there?" #old default
     variables = {
         "columns": columns
     }
@@ -37,7 +37,8 @@ def generate_natural_language_question(columns):
 
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **generate_question_template["llm_kwargs"],
-        return_pl_id=True
+        return_pl_id=True,
+        pl_tags=["New_NL_Question"]
     )
     
     # Associate request to Prompt Template
@@ -73,7 +74,8 @@ def refine_sql_with_promptlayer(natural_language, columns):
     
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **NL_to_SQL_template["llm_kwargs"],
-        return_pl_id=True
+        return_pl_id=True,
+        pl_tags=["Generate_SQL"]
     )
     
     promptlayer.track.metadata(
@@ -110,7 +112,8 @@ def sql_to_NL_answer(df, natural_language):
     
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **SQL_to_NL_template["llm_kwargs"],
-        return_pl_id=True
+        return_pl_id=True,
+        pl_tags=["Explain_SQL"]
     )
     
     # Associate request to Prompt Template
