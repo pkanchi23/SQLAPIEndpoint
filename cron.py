@@ -6,6 +6,7 @@ from pathlib import Path
 import openai
 import promptlayer
 from dotenv import load_dotenv
+import random
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,6 +21,7 @@ current_dir = Path(__file__).parent
 db_path = current_dir / 'northwind.db'
 conn = sqlite3.connect(str(db_path))
 cursor = conn.cursor()
+user_id = "Cron_"+str(random.randint(10000000, 99999999))
 
 # Function to generate a natural language question (placeholder for your logic)
 def generate_natural_language_question(columns):
@@ -41,6 +43,13 @@ def generate_natural_language_question(columns):
     promptlayer.track.prompt(request_id=pl_id, 
         prompt_name='generate_SQL_question', prompt_input_variables=variables)
     
+    promptlayer.track.metadata(
+        request_id=pl_id,
+        metadata={
+            "User_ID":user_id
+        }
+    )
+    
     question = response.choices[0].message.content
     return question
 
@@ -59,6 +68,13 @@ def refine_sql_with_promptlayer(natural_language, columns):
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **NL_to_SQL_template["llm_kwargs"],
         return_pl_id=True
+    )
+    
+    promptlayer.track.metadata(
+        request_id=pl_id,
+        metadata={
+            "User_ID":user_id
+        }
     )
     
     # Associate request to Prompt Template
@@ -89,6 +105,13 @@ def sql_to_NL_answer(df, natural_language):
     # Associate request to Prompt Template
     promptlayer.track.prompt(request_id=pl_id, 
         prompt_name='SQL to NL', prompt_input_variables=variables)
+    
+    promptlayer.track.metadata(
+        request_id=pl_id,
+        metadata={
+            "User_ID":user_id
+        }
+    )
 
     NL_answer = response.choices[0].message.content
     return NL_answer, pl_id
