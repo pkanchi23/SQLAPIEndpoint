@@ -75,7 +75,7 @@ def refine_sql_with_promptlayer(natural_language, columns):
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **NL_to_SQL_template["llm_kwargs"],
         return_pl_id=True,
-        pl_tags=["Generate_SQL"]
+        pl_tags=["Generate-SQL"]
     )
     
     promptlayer.track.metadata(
@@ -113,7 +113,7 @@ def sql_to_NL_answer(df, natural_language):
     response, pl_id = promptlayer.openai.ChatCompletion.create(
         **SQL_to_NL_template["llm_kwargs"],
         return_pl_id=True,
-        pl_tags=["Explain_SQL"]
+        pl_tags=["Explain-SQL"]
     )
     
     # Associate request to Prompt Template
